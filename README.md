@@ -1,5 +1,7 @@
 # coop
 
+## Demo Netlify : [here](https://coop-2021-benjamin-mathieu.netlify.app/) 
+
 ## Project setup
 ```
 npm install
@@ -14,6 +16,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
