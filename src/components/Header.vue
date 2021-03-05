@@ -12,7 +12,6 @@
                     <router-link to="/membres">Membres</router-link>
                 </li>
                 <li>
-                    <!-- <router-link to="/connexion"><button>Se connecter</button></router-link> -->
                     <button @click="seDeconnecter">Connexion / Se Déconnecter</button>
                 </li>
             </ul>

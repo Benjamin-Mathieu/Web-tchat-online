@@ -34,6 +34,9 @@ export default {
     this.chargerConversation();
     this.$bus.$on('charger-conversations', this.chargerConversation)
 
+    // this.chargerMessages();
+    // this.$bus.$on('charger-messages', this.chargerMessages)
+
       if(!this.$store.state.membre) {
         if(this.$route.path != "/connexion") {
           this.$router.push("/connexion");
@@ -65,8 +68,9 @@ export default {
           alert(error.response.data.message)
       })
 
-    },
     }
+
+  } 
 }
 </script>
 
