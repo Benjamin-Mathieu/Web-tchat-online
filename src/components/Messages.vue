@@ -4,8 +4,13 @@
         <b><router-link :to="{name: 'Membre', params:{id : membre.id}}">{{membre.fullname}}</router-link></b>
         {{message.message}}
 
-        <img src="" alt="">
-        <form v-if="showEdit" @submit.prevent="editerMessage">
+        <button @click="openEdit" v-if="showEdit">
+            <img src="../assets/icons/edit.svg" alt="edit-icon" style="height: 16px; width: 16px">
+        </button>
+        <button @click="supprimerMessage" v-if="showEdit">
+            <img src="../assets/icons/delete.svg" alt="delete-icon" style="height: 16px; width: 16px">
+        </button>
+        <form v-if="isOpen"  @submit.prevent="editerMessage">
             <div><input v-model="editMessage" required type="text" placeholder="Tapez votre message"></div>
             <div><button>Editer message</button></div>
         </form>
@@ -20,7 +25,8 @@ export default {
         return {
             logoMembre: '',
             editMessage: '',
-            showEdit: false
+            showEdit: false,
+            isOpen: false
         }
     },
 
@@ -28,12 +34,10 @@ export default {
         this.logoMembre = this.membre.id;
         // console.log(this.$store.state.membre.id);
         // console.log(this.message.member_id);
-        console.log(this.message);
 
         if(this.message.member_id == this.$store.state.membre.id) {
             this.showEdit = true;
-        }
-        
+        }        
     },
 
     methods: {
@@ -44,22 +48,22 @@ export default {
                 message: this.editMessage,
                 token: this.$store.state.token
             }).then(response => {
-                  console.log("Message edité");   
+                console.log("Message edité");   
+            })
+        },
+        supprimerMessage() {
+            api.delete('channels/' + this.message.channel_id + '/posts/' + this.message.id, {
+                channel_id: this.message.channel_id,
+                id: this.message.id,
+                token: this.$store.state.token
+            }).then(response => {
+                console.log("Message supprimé");   
             })
         },
 
-        // nouveauMessage() {
-        //     api.get('channels/' + this.message.channel_id + '/posts/' + this.message.id), {
-        //         channel_id = this.message.channel_id,
-        //         id = this.message.id,
-        //         message = this.message.message,
-        //         token: this.$store.state.token
-        //     }.then(response => {
-        //         this.test = response.data;
-        //         console.log(test);
-        //     })
-        // }
-
+        openEdit() {
+            this.isOpen = !this.isOpen;
+        }
 
     }
 }
@@ -71,9 +75,10 @@ export default {
         margin: 1em;
         border-radius: 0.3em;
         padding: 1em;
+        
         .avatar {
-        height: 30px; width: 30px;
-    }
+            height: 30px; width: 30px;
+        }
     }
     
 </style>
