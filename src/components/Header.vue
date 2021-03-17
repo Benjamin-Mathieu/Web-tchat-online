@@ -3,16 +3,16 @@
         <nav class="navbar">
             <ul>
                 <li>
-                    <router-link to="/connexion">Coop</router-link>
-                </li>
-                <li>
                     <router-link to="/">Conversations</router-link>
                 </li>
                 <li>
                     <router-link to="/membres">Membres</router-link>
                 </li>
-                <li>
-                    <button @click="seDeconnecter">Connexion / Se Déconnecter</button>
+                <li v-if="this.$store.state.token === false">
+                    <router-link to="/connexion" >Connexion</router-link>
+                </li>
+                <li v-else>
+                    <button @click="seDeconnecter">Se déconnecter</button> 
                 </li>
             </ul>
         </nav>
@@ -24,8 +24,8 @@ export default {
     name : 'Header',
     methods : {
         seDeconnecter() {
-            this.$store.commit('seDeconnecter')
-            this.$router.push("/connexion")
+            this.$store.commit('seDeconnecter');
+            alert('Vous êtes déconnecté');
         }
     }
 }
@@ -50,8 +50,7 @@ export default {
     }
     .navbar button {
         padding: 0.7em;
-        color: green;
-        background-color: whitesmoke;
+        background-color: rgb(62, 172, 172);
         border-radius: 0.3em;
     }
     .navbar button:hover {
