@@ -5,8 +5,8 @@ import store from './store'
 import axios from 'axios'
 
 window.api = axios.create({
-  baseURL: "https://tools.sopress.net/iut/coop/api/",
-  headers: { Authorization: "f0405cfc6dd77a18a4427ac603e855c0ed152b96" }
+  baseURL: "https://allweb.fun/coop/api",
+  headers: { Authorization: "61745e9246220c11e174d36c7115ff8a5e102bd8" }
 });
 
 Vue.config.productionTip = false
