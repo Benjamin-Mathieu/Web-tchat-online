@@ -4,6 +4,7 @@
         <b><router-link :to="{name: 'Membre', params:{id : membre.id}}">{{membre.fullname}}</router-link></b>
         {{message.message}}
 
+        <img src="" alt="">
         <form v-if="showEdit" @submit.prevent="editerMessage">
             <div><input v-model="editMessage" required type="text" placeholder="Tapez votre message"></div>
             <div><button>Editer message</button></div>
@@ -19,22 +20,31 @@ export default {
         return {
             logoMembre: '',
             editMessage: '',
-            showEdit: true
+            showEdit: false
         }
     },
 
     mounted() {
         this.logoMembre = this.membre.id;
-        console.log(this.$store.state);
+        // console.log(this.$store.state.membre.id);
+        // console.log(this.message.member_id);
         console.log(this.message);
+
+        if(this.message.member_id == this.$store.state.membre.id) {
+            this.showEdit = true;
+        }
+        
     },
 
     methods: {
         editerMessage() {
-            api.put('channels/' + this.message.channel_id + '/posts/' + this.message.id).then(response => {
-                    if(this.message.member_id == this.membre.id) {
-                        console.log('ok')
-                    }
+            api.put('channels/' + this.message.channel_id + '/posts/' + this.message.id, {
+                channel_id: this.message.channel_id,
+                id: this.message.id,
+                message: this.editMessage,
+                token: this.$store.state.token
+            }).then(response => {
+                  console.log("Message edité");   
             })
         },
 

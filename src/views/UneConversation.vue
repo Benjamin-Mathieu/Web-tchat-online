@@ -66,8 +66,8 @@ export default {
     methods: {
         envoyerMessage() {
             api.post('channels/' + this.channel_id + '/posts',  {
-                channel_id : this.member_id,
-                member_id : this.channel_id,
+                channel_id : this.channel_id,
+                member_id : this.member_id,
                 message : this.message
             }).then(response => {
                 this.chargerMessages()
