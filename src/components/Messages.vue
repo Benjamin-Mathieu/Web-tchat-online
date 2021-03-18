@@ -1,6 +1,6 @@
 <template>
     <div class="message">
-        <img class="avatar" :src="'https://avatars.dicebear.com/v2/jdenticon/'+logoMembre+'.svg'" alt="">
+        <img class="avatar" :src="'https://avatars.dicebear.com/v2/jdenticon/'+membre.id+'.svg'" alt="">
         <b><router-link :to="{name: 'Membre', params:{id : membre.id}}">{{membre.fullname}}</router-link></b>
         {{message.message}}
 
@@ -23,7 +23,6 @@ export default {
 
     data() {
         return {
-            logoMembre: '',
             editMessage: '',
             showEdit: false,
             isOpen: false
@@ -31,13 +30,12 @@ export default {
     },
 
     mounted() {
-        this.logoMembre = this.membre.id;
         // console.log(this.$store.state.membre.id);
         // console.log(this.message.member_id);
 
-        if(this.message.member_id == this.$store.state.membre.id) {
-            this.showEdit = true;
-        }        
+        // if(this.message.member_id == this.$store.state.membre.id) {
+        //     this.showEdit = true;
+        // }        
     },
 
     methods: {

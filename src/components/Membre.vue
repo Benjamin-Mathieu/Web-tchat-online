@@ -1,7 +1,7 @@
 <template>
     <div class="membres">
         <div class="info"> 
-            <img class="avatar" :src="'https://avatars.dicebear.com/v2/jdenticon/'+logoMembre+'.svg'" alt="">
+            <img class="avatar" :src="'https://avatars.dicebear.com/v2/jdenticon/'+membre.id+'.svg'" alt="">
             <p>Pseudo: <router-link :to="{name: 'Membre', params:{id : membre.id}}">{{membre.fullname}}</router-link></p>
             <p>Email: <a :href="'mailto:'+membre.email">{{membre.email}}</a></p>
             <div class="column">
@@ -15,14 +15,7 @@
 <script>
 export default {
     props: ['membre'],
-    data() {
-        return {
-            logoMembre: ''
-        }
-    },
-    mounted() {
-        this.logoMembre = this.membre.id;
-    },
+
     computed: {
         membreConnecte() {
             return this.$store.state.membre.id = this.membre.id
