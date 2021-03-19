@@ -1,9 +1,9 @@
 <template>
     <div class="row">
         <div class="column">
-            
-            <router-link :to="{name: 'Conversation', params:{id : conversation.id}}">{{conversation.topic}}</router-link>
+            <h2><router-link :to="{name: 'Conversation', params:{id : conversation.id}}">{{conversation.topic}}</router-link></h2>
             <span class="tag">tags: {{conversation.label}}</span>
+            
             <div class="buttons">
                 <button @click="openEdit"><img src="../assets/icons/edit.svg" alt="edit-topic"></button>
                  
@@ -16,6 +16,7 @@
                 <button @click="effacerConversation"><img src="../assets/icons/delete.svg" alt="delete-topic"></button>
             </div>
         </div>
+        <hr>
     </div>
 </template>
 
@@ -61,13 +62,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .row {
-        border: 1px solid black;
-        
+    .row {        
         .column {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding: 0.3em;
             a {
                 text-decoration: none;
                 color: #2750B8;

@@ -1,19 +1,27 @@
 <template>
     <div class="message">
-        <img class="avatar" :src="'https://avatars.dicebear.com/v2/jdenticon/'+membre.id+'.svg'" alt="">
+        <img class="avatar" :src="'https://avatars.dicebear.com/v2/jdenticon/'+membre.id+'.svg'" alt="avatar-membre">
+        
         <b><router-link :to="{name: 'Membre', params:{id : membre.id}}">{{membre.fullname}}</router-link></b>
-        {{message.message}}
-        <button @click="openEdit" v-if="showEdit">
+        <hr>
+        
+        <p>{{message.message}}</p>
+        
+        <div class="buttons">
+            <button @click="openEdit" v-if="showEdit">
             <img src="../assets/icons/edit.svg" alt="edit-icon" style="height: 16px; width: 16px">
-        </button>
-        <button @click="supprimerMessage" v-if="showEdit">
-            <img src="../assets/icons/delete.svg" alt="delete-icon" style="height: 16px; width: 16px">
-        </button>
+            </button>
+            <button @click="supprimerMessage" v-if="showEdit">
+                <img src="../assets/icons/delete.svg" alt="delete-icon" style="height: 16px; width: 16px">
+            </button>
+        </div>
+        
         <form v-if="isOpen"  @submit.prevent="editerMessage">
             <div><input v-model="editMessage" required type="text" placeholder="Editer le message"></div>
             <div><button>OK</button></div>
         </form>
-        <p style="text-align: right; font-size: 0.8em">posté le {{dateMsg}}</p>
+    
+        <p style="text-align: right; font-size: 0.8em">posté le {{dateMsg}}</p> 
     </div>
 </template>
 
@@ -47,7 +55,7 @@ export default {
                 message: this.editMessage,
                 token: this.$store.state.token
             }).then(response => {
-                console.log("Message edité");   
+                alert("Message edité");
             })
         },
         supprimerMessage() {
@@ -57,7 +65,7 @@ export default {
                     id: this.message.id,
                     token: this.$store.state.token
                 }).then(response => {
-                    console.log("Message supprimé");   
+                    console.log("Message supprimé");
                 })
             }
             
@@ -77,10 +85,32 @@ export default {
         margin: 1em;
         border-radius: 0.3em;
         padding: 1em;
+        position: relative;
+
+        hr {
+            margin: 1em 0;
+        }
+
+        .buttons {
+            display: none;
+            position: absolute;
+            top: 0; right: 0;
+        }
         
         .avatar {
-            height: 30px; width: 30px;
+            height: 40px; width: 40px;
+            margin-right: 1em;
         }
     }
-    
+
+    .message:hover {
+        background-color: #AAA;
+
+        .buttons{
+            display: block;
+        }
+        button:hover {
+            cursor: pointer;
+        }
+    }
 </style>

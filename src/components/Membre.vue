@@ -5,7 +5,6 @@
             <p>Pseudo: <router-link :to="{name: 'Membre', params:{id : membre.id}}">{{membre.fullname}}</router-link></p>
             <p>Email: <a :href="'mailto:'+membre.email">{{membre.email}}</a></p>
             <div class="column">
-            <button>Voir conversations</button>
             <button @click="effacerMembre">Supprimer membre</button>
         </div>
         </div>

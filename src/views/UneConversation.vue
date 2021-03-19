@@ -10,9 +10,9 @@
             </div> 
         </div>
         
-        <form @submit.prevent="envoyerMessage">
-            <div><input v-model="message" required type="text" placeholder="Tapez votre message"></div>
-            <div><button>Envoyer message</button></div>
+        <form class="test" @submit.prevent="envoyerMessage">
+            <input v-model="message" required type="text" placeholder="Tapez votre message">
+            <button>Envoyer</button>
         </form>
     </div>
 </template>
@@ -36,7 +36,9 @@ export default {
     },
 
     mounted() {
-        this.chargerMessages()
+        this.chargerMessages();
+        this.$bus.$on('charger-messages', this.chargerMessages);
+
         if(this.$route.params.member_id) 
         {
             this.membre = this.$store.getters.getMembre(this.$route.params.member_id)
@@ -51,7 +53,7 @@ export default {
                         if(message.member_id == this.membre.id) 
                         {
                             message.conversation = conversation
-                            this.messages.push(message)
+                            this.messages.push(message);
                         }
                     })
                     cpt++;
@@ -71,6 +73,7 @@ export default {
                 message : this.message
             }).then(response => {
                 this.chargerMessages()
+                this.message = ''
             })
         },
         chargerMessages() {
@@ -78,6 +81,7 @@ export default {
                 token: this.$store.state.token
             }).then(response => {
                 this.messages = response.data
+                this.messages.reverse() // Affiche les messages du plus ancien au plus récent
             })
       }
     }
@@ -89,25 +93,24 @@ export default {
         padding: 1em;
         text-align: left;
         margin: auto;
-    }
 
-    form {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        margin-top: 1em;
-
-        input {
-            height: 2em;
-            width: 400px;
-            margin: auto;
-        }
-
-        button{
-            padding: 0.7em;
-            text-align: center;
+        form {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             margin-top: 1em;
+
+            input {
+                width: 90%;
+                padding: .7em;
+            }
+
+            button{
+                text-align: center;
+                padding: .7em;
+            }
         }
     }
+
+    
 </style>

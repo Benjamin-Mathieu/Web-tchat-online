@@ -26,6 +26,7 @@ export default {
         seDeconnecter() {
             this.$store.commit('seDeconnecter');
             alert('Vous êtes déconnecté');
+            this.$router.push("/connexion")
         }
     }
 }
@@ -50,8 +51,10 @@ export default {
     }
     .navbar button {
         padding: 0.7em;
-        background-color: rgb(62, 172, 172);
+        color: whitesmoke;
+        background-color: #9b4dca;
         border-radius: 0.3em;
+        border: none;
     }
     .navbar button:hover {
         color: whitesmoke;
@@ -59,5 +62,6 @@ export default {
         cursor: pointer;
         transition: 0.7s ease;
         transform: scale(1.1);
+        
     }
 </style>

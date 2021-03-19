@@ -59,12 +59,13 @@ export default {
     border: none;
     background-color: #2750B8;
     color: white;
+    opacity: 0.8;
     transition: .3s ease;
 }
 
 .new-conv-button:hover {
     cursor: pointer;
-    transform: scale(1.1);
+    opacity: 1;
     transition: .7s ease;
 }
 
@@ -120,12 +121,13 @@ export default {
             border: none;
             background-color: #2750B8;
             color: white;
+            opacity: 0.8;
             transition: .3s ease;
 
         }
         .creer-conv-button:hover {
             cursor: pointer;
-            transform: scale(1.1);
+            opacity: 1;
             transition: .7s ease;
         }
     }

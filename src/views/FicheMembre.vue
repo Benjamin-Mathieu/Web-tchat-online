@@ -1,10 +1,12 @@
 <template>
 <div>
-    <h1>Fiche membre : {{leMembre.fullname}}</h1>
     <div class="fiche">
-        <img class="avatar" :src="'https://avatars.dicebear.com/v2/jdenticon/'+leMembre.id+'.svg'" alt="avatar-logo">
-        <a :href="'mailto:'+leMembre.email">{{leMembre.email}}</a>
-        <p>Membre depuis le {{dateCreation}}</p>
+        <div><img class="avatar" :src="'https://avatars.dicebear.com/v2/jdenticon/'+leMembre.id+'.svg'" alt="avatar-logo"></div>
+        <div class="info-membre">
+            <h1>{{leMembre.fullname}}</h1>
+            <p>Email: <a :href="'mailto:'+leMembre.email">{{leMembre.email}}</a></p>
+            <p>Membre depuis le {{dateCreation}}</p>
+        </div>
     </div>
 
     <h2>Messages</h2>
@@ -47,9 +49,7 @@ export default {
                 response.data.forEach(message => {
                     if(message.member_id == this.leMembre.id) {
                         message.conversation = conversation;
-                        //console.log(message)
                          this.messages.push(message)
-                        // console.log(this.messages);
                     }
                 })
                 cpt++
@@ -81,10 +81,17 @@ export default {
 <style lang="scss">
     .fiche {
         display: flex;
-        flex-direction: column;
         align-items: center;
+        text-align: left;
+        padding: 1em;
         .avatar {
             width: 80px; height: 80px;
+        }
+        .info-membre {
+            margin-left: 1em;
+            h1{
+                text-align: left;
+            }
         }
     }
 </style>

@@ -2,8 +2,14 @@
 <div>
         <form class="form-connexion" v-on:submit.prevent="connecterCompte">
             <div><h2>Se connecter</h2></div>
-            <div><input class="input-connexion" v-model="email" required type="email" placeholder="E-mail"></div>
-            <div><input class="input-connexion" v-model="password" required type="password" name="Mot de passe" id="pass" placeholder="Mot de passe"></div>
+            <div>
+                <b>E-mail</b>
+                <input class="input-connexion" v-model="email" required type="email" placeholder="E-mail">
+            </div>
+            <div>
+                <b>Mot de passe</b>
+                <input class="input-connexion" v-model="password" required type="password" name="Mot de passe" id="pass" placeholder="Mot de passe">
+            </div>
             <div><button class="connect-button">Connexion</button></div>
             <p><router-link to="/creer-compte" class="link">Créer un compte</router-link></p>
         </form>
@@ -41,9 +47,9 @@ export default {
 
 <style lang="scss">
     .form-connexion{
-        border: 1px solid black;
         padding: 1em;
-        width: 30%;
+        width: 50%;
+        height: 100vh;
         margin: auto;
 
         > :first-child {
@@ -54,8 +60,6 @@ export default {
         .input-connexion {
             padding: 0.3em;
             margin: 0.3em;
-            border-top: none; border-left: none; border-right: none;
-            border-bottom: 1px solid #2750B8;
             width: 100%;
         }
 
@@ -66,13 +70,14 @@ export default {
             border-radius: .3em;
             border: none;
             background-color: #2750B8;
+            opacity: .8;
             color: white;
             transition: .3s ease;
 
         }
         .connect-button:hover {
             cursor: pointer;
-            transform: scale(1.1);
+            opacity: 1;
             transition: .7s ease;
         }
 
