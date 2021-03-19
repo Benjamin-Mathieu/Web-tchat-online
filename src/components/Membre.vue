@@ -21,12 +21,13 @@ export default {
         }
     },
     methods: {
+        // Appel à l'API pour effacer un membre
         effacerMembre() {
                 if(confirm('Voulez-vous supprimer le membre ' + this.membre.fullname+ '?')) {
                 api.delete('members/'+this.membre.id).then(response => {
-                    this.$bus.$emit('chargerMembres')
+                    this.$bus.$emit('chargerMembres'); // Exécution de la fonction chargerMembre dans App.vue
                 }).catch(error => {
-                    console.log(error.response.data)
+                    console.log(error.response.data);
                 })
             }      
         }

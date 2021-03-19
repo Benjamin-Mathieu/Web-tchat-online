@@ -20,12 +20,16 @@ export default {
         }
     },
     methods : {
+
+        // Création du compte avec l'api
         creerCompte() {
             api.post("members", {
+                // Récupération des data rentrés dans les inputs pour l'envoi
                 fullname: this.fullname,
                 email: this.email,
                 password: this.password
             }).then(response => {
+                // Si tout se passe bien, message d'alerte et redirection
                 alert("Votre compte a été crée, vous pouvez vous connecter à Coop !")
                 this.$router.push('/connexion')
                 console.log(response.data)

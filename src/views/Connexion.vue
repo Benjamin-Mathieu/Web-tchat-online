@@ -20,11 +20,13 @@
 export default {
     data() {
         return {
-            email : "test@test.fr",
-            password : "test"
+            email : "",
+            password : ""
         }
     },
     methods : {
+
+        // Connexion du compte avec appel sur API
         connecterCompte() {
             api.post("members/signin", {
                 email : this.email,

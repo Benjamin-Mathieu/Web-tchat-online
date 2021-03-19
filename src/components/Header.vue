@@ -23,6 +23,7 @@
 export default {
     name : 'Header',
     methods : {
+        // Exécute la mutation dans le store pour effectuer la déconnexion du membre
         seDeconnecter() {
             this.$store.commit('seDeconnecter');
             alert('Vous êtes déconnecté');

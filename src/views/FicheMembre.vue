@@ -1,5 +1,6 @@
 <template>
 <div>
+    <!-- Affichage des infos du membre (avatar, fullname, email, date de création) -->
     <div class="fiche">
         <div><img class="avatar" :src="'https://avatars.dicebear.com/v2/jdenticon/'+leMembre.id+'.svg'" alt="avatar-logo"></div>
         <div class="info-membre">
@@ -10,6 +11,7 @@
     </div>
 
     <h2>Messages</h2>
+    <!-- Affichage des 10 derniers messages du membre -->
         <template v-for="message in messagesTries">
             <Message :message="message" :membre="leMembre"></Message>
         </template>
@@ -38,21 +40,26 @@ export default {
     },
 
     mounted() {
+        // Appel de la méthode getMembre dans le store pour récupérer les données du membre
         this.leMembre = this.$store.getters.getMembre(this.$route.params.id);
+
+        // Récupération de la date du membre + mise en forme pour retourné la date
         let d = new Date(this.leMembre.created_at);
         let options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         this.dateCreation = d.toLocaleDateString('fr-FR', options);
             
         let cpt=0;
+
+        // Récupération de tous les messages postés par le membre lorsque le member_id du message correspond à l'id du membre
         this.$store.state.conversations.forEach(conversation => {
             api.get('channels/' + conversation.id + '/posts').then(response => {
                 response.data.forEach(message => {
                     if(message.member_id == this.leMembre.id) {
                         message.conversation = conversation;
-                         this.messages.push(message)
+                        this.messages.push(message); // envoi du message dans l'array messages
                     }
                 })
-                cpt++
+                cpt++;
                 if(this.$store.state.conversations.length == cpt) {
                     setTimeout(() => this.loading=false,2000);
                 }
@@ -62,6 +69,7 @@ export default {
     },
 
     computed: {
+        // Fonction qui trie les 10 derniers messages postés par le membre
         messagesTries() {
             function compare(a, b) {
                 if(a.created_at < b.created_at) {

@@ -37,8 +37,6 @@ export default {
 
     mounted() {
         this.chargerMessages();
-        this.$bus.$on('charger-messages', this.chargerMessages);
-
         if(this.$route.params.member_id) 
         {
             this.membre = this.$store.getters.getMembre(this.$route.params.member_id)
@@ -62,7 +60,9 @@ export default {
                         this.loading = false
                     }
                 })
+                this.$bus.$on("charger-messages", this.chargerMessages());
             })
+            
         }
     },
     methods: {
@@ -82,6 +82,8 @@ export default {
             }).then(response => {
                 this.messages = response.data
                 this.messages.reverse() // Affiche les messages du plus ancien au plus récent
+            }).catch(error => {
+                alert(error.response.data.message);
             })
       }
     }

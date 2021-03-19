@@ -1,6 +1,8 @@
 <template>
 <div>
     <button class="new-conv-button" @click="afficherFormulaire">Nouvelle conversation</button>
+    
+    <!-- Si le bouton est cliqué alors le formulaire pour crée une conversation s'affiche -->
     <div v-if="afficher" id="creer-conversation">
         <section>
             <h3>Ajouter une conversation</h3>
@@ -24,17 +26,15 @@ export default {
             label: ""
         }
     },
-    mounted() {
-        this.$bus.$on('creer-conversation', this.afficherFomulaire)
-    },
     methods : {
+        // Appel à l'API pour crée une novuelle conversation
         creerConversation() {
             api.post('channels', {
                 label : this.label,
                 topic : this.topic,
             }).then(response => {
-                this.masquerFormulaire()
-                this.$bus.$emit('charger-conversations')
+                this.masquerFormulaire();
+                this.$bus.$emit('charger-conversations');
             })
         },
         afficherFormulaire() {

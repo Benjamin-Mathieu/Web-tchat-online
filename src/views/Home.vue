@@ -1,10 +1,13 @@
 <template>
   <div class="container">
         <div class="header-container">
-          <h3>Conversations</h3><CreerConversation/>
+          <h3>Conversations</h3>
+          <!-- Appel du modal pour créer une conversation -->
+          <CreerConversation/>
         </div>
     
     <div class="conversations">
+      <!-- Récupère toute les conversations qui sont stockés dans l'état "conversations" dans le store -->
       <div v-for="conversation in $store.state.conversations">
         <Conversation :conversation="conversation"/>
       </div>
