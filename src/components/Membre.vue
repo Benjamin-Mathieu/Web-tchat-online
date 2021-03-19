@@ -23,13 +23,13 @@ export default {
     },
     methods: {
         effacerMembre() {
-            if(confirm('Voulez-vous supprimer le membre ' + this.membre.fullname+ '?')) {
+                if(confirm('Voulez-vous supprimer le membre ' + this.membre.fullname+ '?')) {
                 api.delete('members/'+this.membre.id).then(response => {
                     this.$bus.$emit('chargerMembres')
                 }).catch(error => {
                     console.log(error.response.data)
                 })
-            }
+            }      
         }
     },
     avatar() {

@@ -8,18 +8,18 @@
 
     <h2>Messages</h2>
     {{messages}}
-    <!-- <template v-for="message in messages">
-        <Messages :message="message" :member="leMembre"/>
-    </template> -->
+    <template v-for="message in messages">
+        <Message :message="message" :member="leMembre"></Message>
+    </template>
 </div>
 </template>
 
 <script>
-import Messages from '@/components/Messages.vue';
+import Message from '@/components/Message.vue';
 
 export default {
     components: {
-        Messages
+        Message
     },
 
     data() {

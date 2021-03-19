@@ -11,8 +11,8 @@
             <img src="../assets/icons/delete.svg" alt="delete-icon" style="height: 16px; width: 16px">
         </button>
         <form v-if="isOpen"  @submit.prevent="editerMessage">
-            <div><input v-model="editMessage" required type="text" placeholder="Tapez votre message"></div>
-            <div><button>Editer message</button></div>
+            <div><input v-model="editMessage" required type="text" placeholder="Editer le message"></div>
+            <div><button>OK</button></div>
         </form>
     </div>
 </template>
@@ -33,9 +33,9 @@ export default {
         // console.log(this.$store.state.membre.id);
         // console.log(this.message.member_id);
 
-        // if(this.message.member_id == this.$store.state.membre.id) {
-        //     this.showEdit = true;
-        // }        
+        if(this.message.member_id == this.$store.state.membre.id) {
+            this.showEdit = true;
+        }        
     },
 
     methods: {
@@ -50,13 +50,16 @@ export default {
             })
         },
         supprimerMessage() {
-            api.delete('channels/' + this.message.channel_id + '/posts/' + this.message.id, {
-                channel_id: this.message.channel_id,
-                id: this.message.id,
-                token: this.$store.state.token
-            }).then(response => {
-                console.log("Message supprimé");   
-            })
+            if(confirm('Supprimer le message ?')) {
+                api.delete('channels/' + this.message.channel_id + '/posts/' + this.message.id, {
+                    channel_id: this.message.channel_id,
+                    id: this.message.id,
+                    token: this.$store.state.token
+                }).then(response => {
+                    console.log("Message supprimé");   
+                })
+            }
+            
         },
 
         openEdit() {

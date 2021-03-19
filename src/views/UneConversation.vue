@@ -5,7 +5,7 @@
 
             <div class="message" v-for="message in messages">
                 <div class="member-msg" v-if="member.id == message.member_id">
-                    <Messages :message="message" :membre="member"/>
+                    <Message :message="message" :membre="member"/>
                 </div>
             </div> 
         </div>
@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import Messages from "@/components/Messages.vue"
+import Message from "@/components/Message.vue"
 
 export default {
     
     components: {
-        Messages
+        Message
     },
 
     data() {
@@ -86,27 +86,28 @@ export default {
 
 <style lang="scss" scoped>
     .messages {
-        border: 1px solid grey;
         padding: 1em;
         text-align: left;
         margin: auto;
-        width: 80%;
     }
 
     form {
         display: flex;
         align-items: center;
+        justify-content: center;
+        flex-direction: column;
         margin-top: 1em;
 
         input {
             height: 2em;
-            width: 300px;
+            width: 400px;
+            margin: auto;
         }
 
         button{
             padding: 0.7em;
             text-align: center;
-            margin-left: 1em;
+            margin-top: 1em;
         }
     }
 </style>
