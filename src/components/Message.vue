@@ -3,7 +3,6 @@
         <img class="avatar" :src="'https://avatars.dicebear.com/v2/jdenticon/'+membre.id+'.svg'" alt="">
         <b><router-link :to="{name: 'Membre', params:{id : membre.id}}">{{membre.fullname}}</router-link></b>
         {{message.message}}
-
         <button @click="openEdit" v-if="showEdit">
             <img src="../assets/icons/edit.svg" alt="edit-icon" style="height: 16px; width: 16px">
         </button>
@@ -14,6 +13,7 @@
             <div><input v-model="editMessage" required type="text" placeholder="Editer le message"></div>
             <div><button>OK</button></div>
         </form>
+        <p style="text-align: right; font-size: 0.8em">posté le {{dateMsg}}</p>
     </div>
 </template>
 
@@ -25,17 +25,18 @@ export default {
         return {
             editMessage: '',
             showEdit: false,
-            isOpen: false
+            isOpen: false,
+            dateMsg: ''
         }
     },
 
     mounted() {
-        // console.log(this.$store.state.membre.id);
-        // console.log(this.message.member_id);
-
         if(this.message.member_id == this.$store.state.membre.id) {
             this.showEdit = true;
-        }        
+        }
+        let d = new Date(this.message.created_at);
+        let options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+        this.dateMsg = d.toLocaleDateString('fr-FR', options);
     },
 
     methods: {

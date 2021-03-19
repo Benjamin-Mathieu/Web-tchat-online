@@ -4,13 +4,17 @@
     <div class="fiche">
         <img class="avatar" :src="'https://avatars.dicebear.com/v2/jdenticon/'+leMembre.id+'.svg'" alt="avatar-logo">
         <a :href="'mailto:'+leMembre.email">{{leMembre.email}}</a>
+        <p>Membre depuis le {{dateCreation}}</p>
     </div>
 
     <h2>Messages</h2>
-    {{messages}}
-    <template v-for="message in messages">
-        <Message :message="message" :member="leMembre"></Message>
-    </template>
+        <template v-for="message in messagesTries">
+            <Message :message="message" :membre="leMembre"></Message>
+        </template>
+    </div>
+    
+    </div>
+    
 </div>
 </template>
 
@@ -27,16 +31,15 @@ export default {
             leMembre: [],
             logoMembre : '',
             messages: [],
-            message: ''
+            dateCreation: ''
         }
     },
 
     mounted() {
         this.leMembre = this.$store.getters.getMembre(this.$route.params.id);
-        console.log(this.leMembre.id);
-        // let d = new Date(this.leMembre.created_at);
-        // let options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        // this.membre.depuis = d.toLocaleDateString('fr-FR', options);
+        let d = new Date(this.leMembre.created_at);
+        let options = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        this.dateCreation = d.toLocaleDateString('fr-FR', options);
             
         let cpt=0;
         this.$store.state.conversations.forEach(conversation => {
